@@ -7,7 +7,7 @@
 - [📊 Sample Database and Table structures](#sample-data)
 - [🙏 Conclusion](#thank-you)
 - [👋 About me/ Connect with me](#about-dinesh)
-
+- [📙 References](#references)
 
 # 👉 Introduction <a name = "ifh-introduction"></a>
 
@@ -15,170 +15,23 @@ The term "relational database" was invented by E. F. Codd at IBM in 1970. Codd i
 
 - Present the data to the user as relations (a presentation in tabular form, i.e. as a collection of tables with each table consisting of a set of rows and columns);
 - Provide relational operators to manipulate the data in tabular form.
+
+### Online editors: 
+- http://sqlfiddle.com/
+- https://livesql.oracle.com/apex/f?p=590:1000
+- https://www.db-fiddle.com/
+
 ---
 
 ## Terminology
 
 | SQL term        | Relational database term           | Description  |
 | ------------- |:-------------:| -----:|
-| Row           | Tuple or record | A data set representing a single item |
-| Column        | Attribute or field      |   A labeled element of a tuple, e.g. "Address" or "Date of birth" |
-| Table | Relation or Base relvar      |    A set of tuples sharing the same attributes; a set of columns and rows |
+| Row           | Tuple or record or horizontal entity or entity instance| A data set representing a single item |
+| Column        | Attribute or field or vertical entity     |   A labeled element of a tuple, e.g. "Address" or "Date of birth" |
+| Table | Relation or base relvar or database object or entity   |    A set of tuples sharing the same attributes; a set of columns and rows |
 | View or result set | Derived relvar      |    Any set of tuples; a data report from the RDBMS in response to a query |
----
-
-## Data Types
-
-- CHARACTER [(length)] or CHAR [(length)]
-- VARCHAR (length)
-- BOOLEAN
-- SMALLINT
-- INTEGER or INT
-- DECIMAL [(p[,s])] or DEC [(p[,s])]
-- NUMERIC [(p[,s])]
-- REAL
-- FLOAT(p)
-- DOUBLE PRECISION
-- DATE
-- TIME
-- TIMESTAMP
-- CLOB [(length)] or CHARACTER LARGE OBJECT [(length)] or CHAR LARGE OBJECT [(length)]
-- BLOB [(length)] or BINARY LARGE OBJECT [(length)]
 --- 
-
-## Valid and Invalid 
-
-- CHAR(10) or CHARACTER(10)
-   * Valid  
-'Race car'  
-'RACECAR'  
-'24865'  
-'1998-10-25'  
-'1998-10-25 ' (Blank characters are truncated)  
-
-  * Invalid  
-24865  
-1998-10-25  
-'Date: 1998-10-25'  
-
-
-- VARCHAR(10)
-  * Valid  
-'Race car'  
-'RACECAR'  
-'24865'  
-'1998-10-25'  
-'1998-10-25 '  
-
-  * Invalid  
-24865  
-1998-10-25  
-'Date: 1998-10-25'  
-
-
-- BOOLEAN
-  * Valid  
-TRUE    
-true  
-True  
-False  
-
-  * Invalid  
-1  
-0  
-Yes  
-No  
-
-- SMALLINT
-  * Valid  
--32768  
-0  
--30.3 (digits to the right of the decimal point are truncated)  
-32767  
-
-  * Invalid  
--33,000,567  
--32769  
-32768  
-1,897,536,000  
-
-- INTEGER or INT
-  * Valid  
--2147483648  
--1025  
-0  
-1025.98 (digits to the right of the decimal point are truncated)  
-2147483647  
-
-  * Invalid
--1,025,234,000,367  
--2147483649  
-2147483648  
-1,025,234,000,367  
-
-- DECIMAL(10,3)
-  * Valid  
-1234567  
-1234567.123  
-1234567.1234 (Final digit is truncated)  
--1234567  
--1234567.123  
--1234567.1234 (Final digit is truncated)  
-
-  * Invalid  
-12345678  
-12345678.12  
-12345678.123  
--12345678  
--12345678.12  
--12345678.123  
-
-- REAL
-  * Valid  
--2345  
-0  
-1E-3  
-1.245  
-123456789012345678901234567890  
-
-  * Invalid
-123,456,789,012,345,678,901,234,567,890,123  
-
-- DATE
-  * Valid  
-DATE '1999-01-01'  
-DATE '2000-2-2'  
-date '0-1-1'  
-
-  * Invalid  
-DATE '1999-13-1'  
-date '2000-2-30'  
-'2000-2-27'  
-date 2000-2-27  
-
-
-- TIME
-  * Valid  
-TIME '00:00:00'  
-TIME '1:00:00'  
-TIME '23:59:59'  
-time '23:59:59.99'  
-
-  * Invalid
-TIME '00:62:00' 
-TIME '00:3:00'  
-TIME '23:01'  
-'24:01:00'  
-
-- TIMESTAMP
-  * Valid  
-TIMESTAMP `1999-12-31 23:59:59.99' 
-TIMESTAMP `0-01-01 00:00:00'  
-
-  * Invalid  
-1999-00-00 00:00:00  
-TIMESTAMP `1999-01-01 00:64:00'  
----
 
 # 👉 Naming Convention <a name = "naming-convention"></a>
 
@@ -206,7 +59,7 @@ create database ifh_database;
 ```SQL
 CREATE TABLE `participant` (
   `participant_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `familyid` varchar(191) DEFAULT NULL,
+  `family_id` varchar(191) DEFAULT NULL,
   `mock_participant` boolean NOT NULL DEFAULT false,
   `first_name` varchar(191) DEFAULT NULL,
   `last_name` varchar(191) DEFAULT NULL,
@@ -225,9 +78,9 @@ CREATE TABLE `participant` (
   `birth_country_id` int(11) DEFAULT NULL,
   `if_other_birth_country` varchar(191) DEFAULT NULL,
   `zipcode` varchar(10) DEFAULT NULL,
-  `home_phone` varchar(20) DEFAULT NULL,
-  `work_phone` varchar(20) DEFAULT NULL,
-  `cell_phone` varchar(20) DEFAULT NULL,
+  `home_phone` char(12) DEFAULT NULL,
+  `work_phone` char(12) DEFAULT NULL,
+  `cell_phone` char(12) DEFAULT NULL,
   `dob` varchar(191) DEFAULT NULL,
   `age` varchar(5) DEFAULT NULL,
   `gender` varchar(191) DEFAULT NULL,
@@ -352,3 +205,12 @@ create table studentenrollments(
 # 👉 Connect with me <a name = "about-dinesh"></a>
  - Email: dmendhe@ifh.rutgers.edu  
  - Phone: (845) 464-5347
+
+
+ # 👉 References <a name = "references"></a>
+
+ - https://dev.mysql.com/doc/
+ - https://docs.microsoft.com/en-us/sql/sql-server/educational-sql-resources?view=sql-server-ver15
+ - https://www.geeksforgeeks.org/sql-tutorial/
+ - https://www.w3schools.com/sql/default.asp
+ - https://docs.oracle.com/cd/B28359_01/nav/portal_4.htm
