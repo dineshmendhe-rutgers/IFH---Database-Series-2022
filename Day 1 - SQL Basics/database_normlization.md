@@ -1,5 +1,11 @@
 # Database Normalization
 
+### <u>Note</u>:  
+* Primary use of normalization is to eliminate data redundancy, data anomalies, and data inconsistency. 
+* Any changes that require changes in table structure when more or the same type of data is added is an issue. 
+* A normalized database needs more joins and less storage whereas a denormalized database needs fewer joins and more storage. 
+* Avoid storing attributes in the tables which can be calculated using other attributes unless it is computationally heavy operation. 
+
 ## Database anomalies
 * Updation anomalies
   * If data items are scattered and are not linked to each other properly, then it could lead to inconsistencies and operational overheads. Ex. If user tries to update one data item having its copies scattered over several places, few instances may get updated properly while many others will be left with old values that leads to inconsistent state. 
