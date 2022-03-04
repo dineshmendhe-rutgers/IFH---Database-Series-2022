@@ -1,5 +1,5 @@
 # Institute-for-Health---Database-Series-2022
-# Day 2 - DDL Commands and More
+# Day 3 - DML Commands and More
 
 # Table of Contents
 - [✔️ What you will learn](#ifh-introduction)
@@ -28,7 +28,7 @@ i.e every insert, delete, and update in the table will need insert, update, and 
 * If you are joining two tables with specific column make sure to create a index on that column.
 * Be cognizant on using function on index column, database may ingore already created index because of function application.
 * Index (a,b) is not same as index (b,a)
-* Creating index on temp table is allowed.
+* Creating index on temp table is allowed. 
 * Avoid negative clauses (IS NOT, IS NOT NULL, NOT IN, NOT LIKE, etc.) and subqueries to improve performance.
 * Try to convert <> operator to = operator.
 * Avoid SELECT * instead use specific column names.
