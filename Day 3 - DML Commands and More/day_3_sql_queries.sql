@@ -10,70 +10,72 @@ CREATE DATABASE database_name;
 
 CREATE DATABASE ifh_database_series;
 
+# Indexes and their benefits
 
-# Create Table
-
-# Syntax: 
-
-CREATE TABLE table_name
+DROP TABLE IF EXISTS ifh_emp;
+CREATE TABLE ifh_emp
 (
-  column_name1 data_type(size) constraint_name,
-  column_name2 data_type(size) constraint_name,
-  column_name3 data_type(size) constraint_name,
-  column_name2 data_type(size) constraint_name,
-  column_name3 data_type(size) constraint_name,
-  column_name2 data_type(size) constraint_name,
-  column_name3 data_type(size) constraint_name,
-  ....
-);
-
-# Example: 
-
-CREATE TABLE kinship(
-   kinship_id INT NOT NULL AUTO_INCREMENT,
-   kinship_name VARCHAR(100),
-   PRIMARY KEY (kinship_id)
- );
-
-CREATE TABLE `participant` (
-  `participant_id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT, # by default it is unique, also can be defined like: `participant_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY
-  `family_id` VARCHAR(50) DEFAULT NULL,
-  `mock_participant` boolean NOT NULL DEFAULT false,
-  `first_name` VARCHAR(50) DEFAULT NULL, 
-  `last_name` VARCHAR(50) DEFAULT NULL,
-  `other_name` VARCHAR(70) DEFAULT NULL,
-  `kinship_id` INT(11) DEFAULT NULL,
-  `relationship_with` BIGINT(20) DEFAULT NULL,
-  `address_1` TEXT,
-  `address_2` TEXT,
-  `direction_id` INT(11) DEFAULT NULL,
-  `street_name` VARCHAR(80) DEFAULT NULL,
-  `street_type_id` int(11) DEFAULT NULL,
-  `apt` VARCHAR(50) DEFAULT NULL,
-  `city` VARCHAR(30) DEFAULT NULL,
-  `state_id` INT(11) DEFAULT NULL,
-  `birth_country_id` INT(11) DEFAULT NULL,
-  `if_other_birth_country` VARCHAR(191) DEFAULT NULL,
-  `zipcode` VARCHAR(10) DEFAULT NULL,
-  `home_phone` CHAR(12) DEFAULT NULL,
-  `work_phone` CHAR(12) DEFAULT NULL,
-  `cell_phone` CHAR(12) DEFAULT NULL,
-  `email` VARCHAR(50) DEFAULT NULL UNIQUE,
-  `dob` VARCHAR(15) DEFAULT NULL,
-  `age` VARCHAR(5) DEFAULT NULL,
-  `gender` VARCHAR(15) DEFAULT NULL,
-  `comments` VARCHAR(200) DEFAULT NULL,
-  `created_by` INT(11) DEFAULT NULL,
-  `updated_by` INT(11) DEFAULT NULL,
-  `status` BOOLEAN NOT NULL DEFAULT true,
-  `created_at` TIMESTAMP NULL DEFAULT NULL,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL,
-  PRIMARY KEY (`participant_id`),
-  FOREIGN KEY (kinship_id) REFERENCES kinship(kinship_id)
+	emp_id INT PRIMARY KEY,
+	first_name VARCHAR(50),
+  last_name VARCHAR(50),
+	email VARCHAR(50),
+	department VARCHAR(50)
 );
 
 
-# Drop query 
+# Procedure to add dummy records in the table.
+
+DROP PROCEDURE IF EXISTS addDummyRecords;
+DELIMITER //
+CREATE PROCEDURE addDummyRecords()
+BEGIN
+DECLARE i INT UNSIGNED DEFAULT 1;
+WHILE i < 10000 DO                    
+    INSERT INTO ifh_emp(emp_id, first_name, last_name, email, department)
+    SELECT i, concat('Name', i), concat('Last', i), concat('email@test', i),  concat('IFH_dept', i);
+    SET i = i + 1;
+END WHILE;
+COMMIT; 
+END //
+DELIMITER ;
+
+CALL addDummyRecords();
+
+
+# Explain execution plan query syntax
+
+EXPLAIN 
+SELECT * 
+FROM ifh_emp 
+WHERE emp_id = 90;
+
+EXPLAIN 
+SELECT * 
+FROM ifh_emp 
+WHERE first_name = "Name9";
+
+# Create non-clustered index syntax
+
+CREATE INDEX index_name ON table_name (column_name ASC);  
+CREATE INDEX index_name ON table_name (column_name1, column_name2);
+
+# Example 
+
+CREATE INDEX ix_ifh_emp_name 
+ON ifh_emp (first_name ASC);
+
+# Drop index query syntax
+
+DROP INDEX index_name ON table_name;
+
+# Drop index query
+
+DROP INDEX ix_ifh_emp_name ON ifh_emp; 
+ALTER TABLE ifh_emp DROP PRIMARY KEY;  
+ALTER TABLE ifh_emp DROP INDEX ix_ifh_emp_name 
+
+
+# Drop query syntax
 
 DROP DATABASE IF EXISTS database_name;
 DROP TABLE IF EXISTS table_name;
@@ -92,7 +94,7 @@ VALUES (value1, value2, value3, ...);
 INSERT INTO table_name
 VALUES (value1, value2, value3, ...);
 
-# Example 
+# Example (Refer day 2 SQL)
 
 INSERT INTO `kinship` (`kinship_name`) 
 VALUES ('Father');
@@ -123,14 +125,6 @@ INSERT INTO `participant`
 VALUES 
 	('11111111', '0', 'Vardan', 'Mendhe', '3', '25 Star St', 'Iselin', '1', '1', 'female', 'vm@test.com');
 COMMIT;
-
-# Describe query 
-
-DESC table_name;
-
-# Example 
-
-DESC participant;
 
 # Create index query
 

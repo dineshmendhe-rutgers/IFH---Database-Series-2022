@@ -4,8 +4,6 @@
 # Table of Contents
 - [✔️ What you will learn](#ifh-introduction)
 - [✔️ Creating a database and tables](#creating-a-Database)
-- [✔️ Manipulate Query Results](#manipulate-query-results)
-- [✔️ Advance Techniques](#advance-techniques)
 
 ## 👉 What you will learn <a name="what-you-will-learn"></a>
 	• Create databases and tables, general principles
@@ -83,7 +81,6 @@ Section Description:
 * Primary key, Foreign key and Unique contraint creates indexes by default. 
 * Primary key provides fastest lookup.
 * Equality first and range next.
-* Avoid negative clauses (IS NOT, IS NOT NULL, NOT IN, NOT LIKE, etc.) and subqueries to improve performance.
 <br/>
 
 ## 👉 Basic SQL Queries  <a name="basic-sql-queries"></a>
@@ -102,23 +99,4 @@ Section Description:
 * Create ERD diagram to get big picture and make sure no two table contains similar column names within the database. Always use unique names to reduce ambiguity while fetching the records using join queries. 
 * Use 'IF EXISTS' check before droping database or tables. 
 <br/>
-
-
-## 👉 Manipulate Query Results <a name="manipulate-query-results"></a>
-	• Using row functions
-		○ Character 
-		○ Numeric
-		○ Date and Time
-		○ Data conversion (CAST and CONVERT) 
-	• Using the CASE function
-	• Handling Null values
- 
-## 👉 Advance Techniques  <a name="advance-techniques"></a>
-	• Aggregating results using GROUP BY
-	• Restricting groups with the HAVING clause
-	• Inner Joins
-	• Outer Joins (Left, Right, Full)
-	• Joining a table to itself
-	• Subqueries
-
 
