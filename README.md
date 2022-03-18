@@ -214,3 +214,4 @@ create table studentenrollments(
  - https://www.geeksforgeeks.org/sql-tutorial/
  - https://www.w3schools.com/sql/default.asp
  - https://docs.oracle.com/cd/B28359_01/nav/portal_4.htm
+ - https://joins.spathon.com/

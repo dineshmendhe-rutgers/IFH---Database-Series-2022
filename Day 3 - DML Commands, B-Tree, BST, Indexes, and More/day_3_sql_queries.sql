@@ -3,15 +3,12 @@
 # Create database 
 
 # Syntax:
-
 CREATE DATABASE database_name;
 
 # Example:
-
 CREATE DATABASE ifh_database_series;
 
 # Indexes and their benefits
-
 DROP TABLE IF EXISTS ifh_emp;
 CREATE TABLE ifh_emp
 (
@@ -24,7 +21,6 @@ CREATE TABLE ifh_emp
 
 
 # Procedure to add dummy records in the table.
-
 DROP PROCEDURE IF EXISTS addDummyRecords;
 DELIMITER //
 CREATE PROCEDURE addDummyRecords()
@@ -43,7 +39,6 @@ CALL addDummyRecords();
 
 
 # Explain execution plan query syntax
-
 EXPLAIN 
 SELECT * 
 FROM ifh_emp 
@@ -55,33 +50,27 @@ FROM ifh_emp
 WHERE first_name = "Name9";
 
 # Create non-clustered index syntax
-
 CREATE INDEX index_name ON table_name (column_name ASC);  
 CREATE INDEX index_name ON table_name (column_name1, column_name2);
 
 # Example 
-
 CREATE INDEX ix_ifh_emp_name 
 ON ifh_emp (first_name ASC);
 
 # Drop index query syntax
-
 DROP INDEX index_name ON table_name;
 
 # Drop index query
-
 DROP INDEX ix_ifh_emp_name ON ifh_emp; 
 ALTER TABLE ifh_emp DROP PRIMARY KEY;  
 ALTER TABLE ifh_emp DROP INDEX ix_ifh_emp_name 
 
 
 # Drop query syntax
-
 DROP DATABASE IF EXISTS database_name;
 DROP TABLE IF EXISTS table_name;
 
 # Example: 
-
 DROP DATABASE IF EXISTS ifh_database_series;
 DROP TABLE IF EXISTS participant;
 
@@ -95,7 +84,6 @@ INSERT INTO table_name
 VALUES (value1, value2, value3, ...);
 
 # Example (Refer day 2 SQL)
-
 INSERT INTO `kinship` (`kinship_name`) 
 VALUES ('Father');
 
@@ -129,12 +117,10 @@ COMMIT;
 # Create index query
 
 # Syntax
-
   CREATE INDEX index_name
   ON table_name (column1, column2, ...);
 
 # Example:
-
   CREATE INDEX idx_email
   ON participant (email);
 
@@ -142,14 +128,12 @@ COMMIT;
 
 # Select query:
 # syntax 
-
   SELECT column_name1, column_name2, ...
   FROM table_name
   WHERE condition
   GROUP BY column_name1, column_name2, ...
 
 # Example:
-
   SELECT *
   FROM participant
   WHERE first_name = "Dinesh"
@@ -186,21 +170,18 @@ COMMIT;
   ORDER BY participant_id DESC;
 
 # JOIN query
-
   SELECT first_name, last_name, kinship_name
   FROM participant
   JOIN kinship
   ON participant.kinship_id = kinship.kinship_id;
 
 # JOIN query using aliases
-
   SELECT p.first_name as "First Name", p.last_name as "Last Name", k.kinship_name as "Relationship Name"
   FROM participant as p
   JOIN kinship as k
   ON p.kinship_id = k.kinship_id;
 
 # More about NULL
-
   SELECT 1 IS NULL, 1 IS NOT NULL;
 
   SELECT 0 IS NULL, 0 IS NOT NULL, '' IS NULL, '' IS NOT NULL;
@@ -209,7 +190,6 @@ COMMIT;
 
 
 # CASE query 
-
   CASE
       WHEN condition1 THEN result1
       WHEN condition2 THEN result2
@@ -217,8 +197,7 @@ COMMIT;
       ELSE result
   END;
 
-  # CASE Example
-
+# CASE Example
   SELECT first_name, last_name, 
 CASE
 	WHEN mock_participant = 0 THEN "Not Eligible to enroll"
@@ -228,12 +207,10 @@ FROM participant;
 
 
 # CAST / CONVERT query
-
 CAST(expression AS datatype);  
 CONVERT(value, type)
 
 # CAST Example
-
   SELECT CAST("2022-02-04" AS DATE);
   SELECT CAST(participant_id AS CHAR(50)) AS "Converted to CHAR using CAST function" FROM participant;
   SELECT CONVERT(participant_id, CHAR(50)) AS "Converted to CHAR using CONVERT function" FROM participant;
